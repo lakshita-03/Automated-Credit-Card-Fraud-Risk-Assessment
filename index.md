@@ -52,7 +52,7 @@ The exploratory analysis identified significant class imbalance, along with diff
 
 ## Architecture   
 
-<img src="Fraud Detection Workflow Architecture.png" alt="banner" width="47%"> 
+<img src="picture/Fraud Detection Workflow Architecture.png" alt="banner" width="47%"> 
 
 ### Workflow Steps
 1. **Transaction Input**- A transaction is provided to the fraud detection pipeline with the required transaction attributes.

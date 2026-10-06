@@ -1,11 +1,11 @@
 # Automated Credit Card Fraud Risk Assessment
 
-## 1.Project Overview
+## 1. Project Overview
 - This project focuses on **automated credit card fraud risk assessment** using machine learning and workflow automation. The **Sparkov Credit Card Transactions** dataset is used to train and evaluate fraud detection models.
 - The project uses **Logistic Regression as a baseline and XGBoost as the final model** to generate transaction-level fraud predictions, risk scores, and risk levels.
 - The XGBoost model is deployed through **FastAPI** and connected to **n8n** to automate fraud alert processing, with **Google Gemini** generating structured case notes for flagged transactions.
 
-## 2.Data Sources
+## 2. Data Sources
 The project uses the [**Sparkov Credit Card Transactions dataset**](https://www.kaggle.com/datasets/kartik2112/fraud-detection), which consists of two CSV files: **`fraudTrain.csv`** and **`fraudTest.csv`**.
 ### Dataset Summary
 
@@ -50,7 +50,7 @@ The dataset contains simulated credit card transaction records with information 
 
 The exploratory analysis identified significant class imbalance, along with differences in transaction amounts and fraud rates across transaction categories.
 
-## 3.Architecture   
+## 3. Architecture   
 
 <img src="picture/Fraud Detection Workflow Architecture.png" alt="banner" width="47%"> 
 
@@ -64,10 +64,10 @@ The exploratory analysis identified significant class imbalance, along with diff
 7. **AI Case-Note Generation**- Google Gemini receives the relevant transaction and fraud-risk information and generates a structured case note that can assist an analyst in reviewing the flagged transaction.
 8. **Final Output**- The workflow produces a structured fraud-alert/case-note output containing the model's risk assessment and AI-generated investigation context.
 
-## 4.Exploratory Data Analysis
+## 4. Exploratory Data Analysis
 <iframe src="notebooks/data_inspection.html" width="100%" height="800px"></iframe>
 
-## 5.Machine Learning Pipeline & Model Evaluation
+## 5. Machine Learning Pipeline & Model Evaluation
 
 The machine learning workflow consists of the following stages:
 **Data Preprocessing → Feature Engineering → Logistic Regression → XGBoost → Model Evaluation → Threshold & Risk Analysis**

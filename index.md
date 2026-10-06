@@ -49,3 +49,70 @@ The dataset contains simulated credit card transaction records with information 
 - `1` → Fraudulent transaction
 
 The exploratory analysis identified significant class imbalance, along with differences in transaction amounts and fraud rates across transaction categories.
+4. Project Architecture / Workflow
+
+The complete project combines data analysis, machine learning, API deployment, workflow automation, and generative AI.
+
+## Architecture
+
+                    ┌──────────────────────────┐
+                    │ Sparkov Transaction Data │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ Data Cleaning &           │
+                    │ Feature Engineering      │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ Logistic Regression      │
+                    │ Baseline Model           │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ XGBoost                  │
+                    │ Final Fraud Model        │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ Fraud Risk Score         │
+                    │ Risk Level + Prediction  │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ FastAPI                  │
+                    │ Prediction API            │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ n8n Workflow             │
+                    │ Automation & Routing      │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ Google Gemini            │
+                    │ AI Case-Note Generation  │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │ Fraud Alert /            │
+                    │ Investigation Case Note  │
+                    └──────────────────────────┘
+
+Workflow Steps
+1. Transaction Input- A transaction is provided to the fraud detection pipeline with the required transaction attributes.
+2. Preprocessing-The transaction data is cleaned and transformed using the preprocessing steps developed during model training.
+3. Fraud Prediction-The trained XGBoost model generates a probability-based fraud risk score.
+4. Risk Classification-The risk score is converted into a risk level such as Low, Medium, or High, along with the final fraud prediction.
+5. FastAPI Integration-The trained model is exposed through a FastAPI endpoint, allowing external applications and automation workflows to request fraud predictions.
+6. n8n Automation- n8n acts as the workflow orchestration layer. It receives the transaction/prediction information and controls the subsequent fraud-triage process.
+7. AI Case-Note Generation- Google Gemini receives the relevant transaction and fraud-risk information and generates a structured case note that can assist an analyst in reviewing the flagged transaction.
+8. Final Output- The workflow produces a structured fraud-alert/case-note output containing the model's risk assessment and AI-generated investigation context.

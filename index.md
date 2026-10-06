@@ -66,3 +66,27 @@ The exploratory analysis identified significant class imbalance, along with diff
 
 ## Exploratory Data Analysis
 <iframe src="notebooks/data_inspection.html" width="100%" height="800px"></iframe>
+
+## Machine Learning Pipeline & Model Evaluation
+
+The machine learning workflow consists of the following stages:
+**Data Preprocessing → Feature Engineering → Logistic Regression → XGBoost → Model Evaluation → Threshold & Risk Analysis**
+### Model Development
+- **Logistic Regression** was developed as the baseline classification model.
+- **XGBoost** was selected as the final model based on its performance in fraud classification.
+- The final model generates a **fraud probability/risk score**, which is converted into risk levels and fraud predictions using the selected threshold.
+- Model performance was evaluated using metrics relevant to the highly imbalanced fraud dataset, including **Precision, Recall, F1-Score, ROC-AUC, and PR-AUC**.
+
+### Final XGBoost Performance
+
+| Metric | Score |
+|---|---:|
+| Accuracy | 99.02% |
+| Precision | 37.02% |
+| Recall | 97.20% |
+| F1-Score | 53.62% |
+
+**Threshold & Risk Analysis**- The XGBoost probability output was further analyzed to determine an appropriate classification threshold and assign transactions to different risk levels.
+
+### ML Notebook
+<iframe src="notebooks/ml_analysis.html" width="100%" height="800px"></iframe>

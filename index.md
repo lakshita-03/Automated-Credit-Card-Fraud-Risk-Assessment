@@ -6,7 +6,7 @@
 - The XGBoost model is deployed through **FastAPI** and connected to **n8n** to automate fraud alert processing, with **Google Gemini** generating structured case notes for flagged transactions.
 
 ## Data Sources
-The project uses the **Sparkov Credit Card Transactions dataset**, which consists of two CSV files: **`fraudTrain.csv`** and **`fraudTest.csv`**.
+The project uses the [**Sparkov Credit Card Transactions dataset**](https://www.kaggle.com/datasets/kartik2112/fraud-detection), which consists of two CSV files: **`fraudTrain.csv`** and **`fraudTest.csv`**.
 ### Dataset Summary
 
 | Attribute | Details |
@@ -58,8 +58,11 @@ The exploratory analysis identified significant class imbalance, along with diff
 1. **Transaction Input**- A transaction is provided to the fraud detection pipeline with the required transaction attributes.
 2. **Preprocessing**-The transaction data is cleaned and transformed using the preprocessing steps developed during model training.
 3. **Fraud Prediction**-The trained XGBoost model generates a probability-based fraud risk score.
-4. **Risk Classification**-The risk score is converted into a risk level such as Low, Medium, or High, along with the final fraud prediction.
+4. **Risk Classification**-The risk score is converted into a risk level such as Low, Medium or High along with the final fraud prediction.
 5. **FastAPI Integration**-The trained model is exposed through a FastAPI endpoint, allowing external applications and automation workflows to request fraud predictions.
 6. **n8n Automation**- n8n acts as the workflow orchestration layer. It receives the transaction/prediction information and controls the subsequent fraud-triage process.
 7. **AI Case-Note Generation**- Google Gemini receives the relevant transaction and fraud-risk information and generates a structured case note that can assist an analyst in reviewing the flagged transaction.
 8. **Final Output**- The workflow produces a structured fraud-alert/case-note output containing the model's risk assessment and AI-generated investigation context.
+
+## Exploratory Data Analysis
+<iframe src="notebooks/data_inspection.html" width="100%" height="800px"></iframe>

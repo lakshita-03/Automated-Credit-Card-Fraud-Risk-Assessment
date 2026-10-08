@@ -121,6 +121,7 @@ The 0.70 threshold was selected to prioritize fraud detection while reducing the
 
 ## 7.FastAPI Integration
 The trained XGBoost model was exposed through a lightweight FastAPI REST API, allowing external applications such as n8n to send transactions for real-time fraud scoring.
+''''text
 ┌──────────────────────────┐
 │     Transaction JSON     │
 └────────────┬─────────────┘
@@ -140,6 +141,7 @@ The trained XGBoost model was exposed through a lightweight FastAPI REST API, al
 ┌──────────────────────────┐
 │ Risk Level + Prediction  │
 └──────────────────────────┘
+''''
 
 - Endpoint: Receives transaction data through an HTTP POST request.
 - Input: Transaction features required by the trained preprocessing pipeline.

@@ -93,6 +93,7 @@ The machine learning workflow consists of the following stages:
 
 ## 6. Fraud Risk Scoring
 The trained XGBoost model generates a fraud probability score between 0 and 1 for every transaction. This score is then converted into a risk level and a final fraud prediction using predefined thresholds.
+
 Transaction
      ↓
 XGBoost Model

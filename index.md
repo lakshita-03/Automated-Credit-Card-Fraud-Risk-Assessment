@@ -91,4 +91,23 @@ The machine learning workflow consists of the following stages:
 ### ML Notebook
 <iframe src="notebooks/ml_analysis.html" width="100%" height="800px"></iframe>
 
+## 6. Fraud Risk Scoring
+The trained XGBoost model generates a fraud probability score between 0 and 1 for every transaction. This score is then converted into a risk level and a final fraud prediction using predefined thresholds.
+Transaction
+     ↓
+XGBoost Model
+     ↓
+Fraud Risk Score (0–1)
+     ↓
+Risk Level
+     ↓
+Fraud Prediction
 
+Risk Classification
+Fraud Risk Score	Risk Level	Fraud Prediction
+< 0.30	🟢 Low	0 — Not flagged
+0.30 – < 0.70	🟡 Medium	0 — Not flagged
+≥ 0.70	🔴 High	1 — Fraud Alert
+
+**Decision threshold:** A transaction is flagged as fraudulent when its fraud risk score is ≥ 0.70.
+The 0.70 threshold was selected to prioritize fraud detection while reducing the number of false positives compared with the default 0.50 threshold. At this threshold, the model achieved approximately 95.07% recall, 49.33% precision, and 64.95% F1-score on the test set.

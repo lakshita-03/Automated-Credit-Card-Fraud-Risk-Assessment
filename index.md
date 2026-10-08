@@ -121,15 +121,25 @@ The 0.70 threshold was selected to prioritize fraud detection while reducing the
 
 ## 7.FastAPI Integration
 The trained XGBoost model was exposed through a lightweight FastAPI REST API, allowing external applications such as n8n to send transactions for real-time fraud scoring.
-Transaction JSON
-      ↓
-FastAPI Endpoint
-      ↓
-Preprocessing + XGBoost
-      ↓
-Fraud Risk Score
-      ↓
-Risk Level + Prediction
+┌──────────────────────────┐
+│     Transaction JSON     │
+└────────────┬─────────────┘
+             ▼
+┌──────────────────────────┐
+│    FastAPI Endpoint      │
+└────────────┬─────────────┘
+             ▼
+┌──────────────────────────┐
+│ Preprocessing + XGBoost  │
+└────────────┬─────────────┘
+             ▼
+┌──────────────────────────┐
+│    Fraud Risk Score      │
+└────────────┬─────────────┘
+             ▼
+┌──────────────────────────┐
+│ Risk Level + Prediction  │
+└──────────────────────────┘
 
 - Endpoint: Receives transaction data through an HTTP POST request.
 - Input: Transaction features required by the trained preprocessing pipeline.
@@ -138,18 +148,42 @@ Risk Level + Prediction
 
 ## 8. n8n Automation
 n8n connects the fraud-scoring API with the AI case-note generation workflow, turning the ML model into an automated fraud-triage pipeline.
-Transaction Input
-      ↓
-FastAPI Fraud Scoring
-      ↓
-Risk Classification
-      ↓
-High Risk?
-   ↙       ↘
- Yes        No
- ↓           ↓
-Gemini      End / Monitor
- ↓
-AI Case Note
+                    ┌─────────────────────┐
+                    │   Transaction Input │
+                    └──────────┬──────────┘
+                               ▼
+                    ┌─────────────────────┐
+                    │ FastAPI Fraud       │
+                    │ Scoring             │
+                    └──────────┬──────────┘
+                               ▼
+                    ┌─────────────────────┐
+                    │ Risk Classification │
+                    └──────────┬──────────┘
+                               ▼
+                         ┌────────────┐
+                         │ High Risk? │
+                         └─────┬──────┘
+                              / \
+                           Yes   No
+                            │     │
+                            ▼     ▼
+                     ┌─────────┐  ┌──────────────┐
+                     │ Gemini  │  │ End / Monitor│
+                     └────┬────┘  └──────────────┘
+                          ▼
+                   ┌──────────────┐
+                   │ AI Case Note │
+                   └──────────────┘
+## 9. AI Case-Note Generation
+For transactions classified as High Risk, the n8n workflow passes the transaction details and XGBoost fraud-scoring results to Gemini.
+The information provided to Gemini includes:
+- Transaction details such as amount, merchant, category, and location
+- Fraud risk score
+- Risk level
+- Fraud prediction
+- Relevant transaction characteristics identified by the workflow
+Gemini then generates a concise fraud investigation case note summarizing why the transaction was flagged and highlighting the key details an analyst should review.
 
-
+**REPORT**
+<img src="picture/F8 END.png" alt="banner" width="95%">

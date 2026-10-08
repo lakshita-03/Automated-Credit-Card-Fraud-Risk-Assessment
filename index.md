@@ -93,15 +93,56 @@ The machine learning workflow consists of the following stages:
 
 ## 6. Fraud Risk Scoring
 The trained XGBoost model generates a fraud probability score between 0 and 1 for every transaction. This score is then converted into a risk level and a final fraud prediction using predefined thresholds.
-
 <img src="picture/Fraud Detection Pipeline Infographic.png" alt="banner" width="47%">
-
-Risk Classification
+**Risk Classification**
 Fraud Risk Score	Risk Level	Fraud Prediction
 - < 0.30	Low	0 — Not flagged
 - 0.30 – < 0.70 Medium	0 — Not flagged
 - ≥ 0.70	High	1 — Fraud Alert
-
 **Decision threshold:** A transaction is flagged as fraudulent when its fraud risk score is ≥ 0.70.
 The 0.70 threshold was selected to prioritize fraud detection while reducing the number of false positives compared with the default 0.50 threshold. At this threshold, the model achieved approximately 95.07% recall, 49.33% precision, and 64.95% F1-score on the test set.
+<img src="picture/F1.png" alt="banner" width="47%"> <img src="picture/F2.png" alt="banner" width="47%">
+
+<img src="picture/F3.png" alt="banner" width="47%"> <img src="picture/F4.png" alt="banner" width="47%">
+
+<img src="picture/F5.png" alt="banner" width="47%"> <img src="picture/F6.png" alt="banner" width="47%">
+
+<img src="picture/F7.png" alt="banner" width="47%"> <img src="picture/F8 END.png" alt="banner" width="47%">
+
+## 7.FastAPI Integration
+The trained XGBoost model was exposed through a lightweight FastAPI REST API, allowing external applications such as n8n to send transactions for real-time fraud scoring.
+Transaction JSON
+      ↓
+FastAPI Endpoint
+      ↓
+Preprocessing + XGBoost
+      ↓
+Fraud Risk Score
+      ↓
+Risk Level + Prediction
+
+- Endpoint: Receives transaction data through an HTTP POST request.
+- Input: Transaction features required by the trained preprocessing pipeline.
+- Model Inference: The saved preprocessor and XGBoost model generate the fraud probability.
+- Output: Returns fraud_risk_score, risk_level, and fraud_prediction.
+Add your FastAPI/Swagger screenshot below this section to demonstrate the API in action.
+
+## 8. n8n Automation
+n8n connects the fraud-scoring API with the AI case-note generation workflow, turning the ML model into an automated fraud-triage pipeline.
+Transaction Input
+      ↓
+FastAPI Fraud Scoring
+      ↓
+Risk Classification
+      ↓
+High Risk?
+   ↙       ↘
+ Yes        No
+ ↓           ↓
+Gemini      End / Monitor
+ ↓
+AI Case Note
+
+For high-risk transactions, n8n sends the fraud details and model output to Gemini, which generates a concise case note for analyst review.
+This combines machine learning + API deployment + workflow automation + generative AI in a single finance-focused pipeline.
 

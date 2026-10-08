@@ -105,9 +105,9 @@ Fraud Prediction
 
 Risk Classification
 Fraud Risk Score	Risk Level	Fraud Prediction
-< 0.30	🟢 Low	0 — Not flagged
-0.30 – < 0.70	🟡 Medium	0 — Not flagged
-≥ 0.70	🔴 High	1 — Fraud Alert
+- < 0.30	Low	0 — Not flagged
+- 0.30 – < 0.70 Medium	0 — Not flagged
+- ≥ 0.70	High	1 — Fraud Alert
 
 **Decision threshold:** A transaction is flagged as fraudulent when its fraud risk score is ≥ 0.70.
 The 0.70 threshold was selected to prioritize fraud detection while reducing the number of false positives compared with the default 0.50 threshold. At this threshold, the model achieved approximately 95.07% recall, 49.33% precision, and 64.95% F1-score on the test set.

@@ -121,7 +121,7 @@ The 0.70 threshold was selected to prioritize fraud detection while reducing the
 
 ## 7.FastAPI Integration
 The trained XGBoost model was exposed through a lightweight FastAPI REST API, allowing external applications such as n8n to send transactions for real-time fraud scoring.
-''''text
+```text
 ┌──────────────────────────┐
 │     Transaction JSON     │
 └────────────┬─────────────┘
@@ -141,7 +141,7 @@ The trained XGBoost model was exposed through a lightweight FastAPI REST API, al
 ┌──────────────────────────┐
 │ Risk Level + Prediction  │
 └──────────────────────────┘
-''''
+```
 
 - Endpoint: Receives transaction data through an HTTP POST request.
 - Input: Transaction features required by the trained preprocessing pipeline.
@@ -150,6 +150,7 @@ The trained XGBoost model was exposed through a lightweight FastAPI REST API, al
 
 ## 8. n8n Automation
 n8n connects the fraud-scoring API with the AI case-note generation workflow, turning the ML model into an automated fraud-triage pipeline.
+```text
                     ┌─────────────────────┐
                     │   Transaction Input │
                     └──────────┬──────────┘
@@ -177,6 +178,7 @@ n8n connects the fraud-scoring API with the AI case-note generation workflow, tu
                    ┌──────────────┐
                    │ AI Case Note │
                    └──────────────┘
+```
 ## 9. AI Case-Note Generation
 For transactions classified as High Risk, the n8n workflow passes the transaction details and XGBoost fraud-scoring results to Gemini.
 The information provided to Gemini includes:

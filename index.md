@@ -1,5 +1,5 @@
 # Automated Credit Card Fraud Risk Assessment
-<img src="picture/fraud.jpg" alt="banner" width="45%"> <img src="picture/fraud-2.jpg" alt="banner" width="45%" height="150%"> 
+<img src="picture/fraud.jpg" alt="banner" width="45%"> <img src="picture/fraud-2.jpg" alt="banner" width="45%" height="100%"> 
 
 
 ## 1. Project Overview

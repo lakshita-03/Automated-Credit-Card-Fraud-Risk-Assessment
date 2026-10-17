@@ -1,4 +1,6 @@
 # Automated Credit Card Fraud Risk Assessment
+<img src="picture/fraud.jpg" alt="banner" width="45%"> <img src="picture/fraud-1.jpg" alt="banner" width="45%"> 
+
 
 ## 1. Project Overview
 - This project focuses on **automated credit card fraud risk assessment** using machine learning and workflow automation. The **Sparkov Credit Card Transactions** dataset is used to train and evaluate fraud detection models.
